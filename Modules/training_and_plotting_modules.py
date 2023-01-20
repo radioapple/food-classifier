@@ -171,7 +171,7 @@ def train(model: torch.nn.Module,
                                         loss_fn = loss_fn,
                                         device = device)
         if print_epochs:
-            print(f"Epoch: {epoch} | Train loss: {train_loss: 0.2f} | Train acc: {train_acc*100: 0.2f}% | Test loss: {test_loss: 0.2f} | Test acc: {test_acc*100: 0.2f}%")
+            print(f"Epoch: {epoch} | Train loss: {train_loss: 0.2f} | Train acc: {train_acc*100: 0.1f}% | Test loss: {test_loss: 0.2f} | Test acc: {test_acc*100: 0.1f}%")
         results["train_loss"].append(train_loss)
         results["train_acc"].append(train_acc)
         results["test_loss"].append(test_loss)
@@ -179,6 +179,7 @@ def train(model: torch.nn.Module,
     end_time = timer()
 
     total_train_time = end_time - start_time
+    print(f"Number of epochs: {epochs} | Train loss: {train_loss: 0.2f} | Train acc: {train_acc*100: 0.1f}% | Test loss: {test_loss: 0.2f} | Test acc: {test_acc*100: 0.1f}%")
     print(f"Training took {total_train_time: 0.1f} sec, or {total_train_time:0.1f} min.")
     
     return results, total_train_time
