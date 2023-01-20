@@ -180,7 +180,7 @@ def train(model: torch.nn.Module,
 
     total_train_time = end_time - start_time
     print(f"Number of epochs: {epochs} | Train loss: {train_loss: 0.2f} | Train acc: {train_acc*100: 0.1f}% | Test loss: {test_loss: 0.2f} | Test acc: {test_acc*100: 0.1f}%")
-    print(f"Training took {total_train_time: 0.1f} sec, or {total_train_time:0.1f} min.")
+    print(f"Training took {total_train_time: 0.1f} sec, or {total_train_time/60:0.1f} min.")
     
     return results, total_train_time
 
