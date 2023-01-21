@@ -291,6 +291,7 @@ def compare_results_2(results_lst, model_names_lst = None):
         if len(model_results[key]) > max_len:
             max_len = len(model_results)
     epochs = range(1, max_len+1) # array for x-axis
+    print(max_len)
     
     # Create plot
     n = len(results_lst)
