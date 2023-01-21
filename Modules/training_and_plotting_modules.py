@@ -304,9 +304,9 @@ def compare_results_2(results_lst, model_names_lst = None, figsize = None):
     cols = len(keys_lst)
     
     if figsize:
-        plt.figure(figsize = (7*cols, 4*rows))
-    else:
         plt.figure(figsize = figsize)
+    else:
+        plt.figure(figsize = (7*cols, 4*rows))
     
     plot_num = 0
     for i, model_results in enumerate(results_lst):
