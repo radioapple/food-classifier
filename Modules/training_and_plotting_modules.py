@@ -242,8 +242,8 @@ def compare_results(results_lst, model_names_lst = None):
             
             plt.plot(epochs, model_results[key], label = model_name)
         
-        #if "acc" in key:
-        #  plt.ylim(0, 1)
+        if "acc" in key:
+          plt.ylim(0.25, 1)
         plt.xlim(epochs[0], epochs[-1])
         
         plt.title(key)
@@ -251,7 +251,8 @@ def compare_results(results_lst, model_names_lst = None):
         plt.legend()
     return
 
-def compare_results_2(results_lst, model_names_lst = None, figsize = None):
+def compare_results_2(results_lst, model_names_lst = None, figsize = None, 
+                      model_params = None, important_params = None):
     """
     Plots results of all the models whose results are given in <results_lst>
     on one plot so they can be seen side-by-side.
@@ -272,14 +273,30 @@ def compare_results_2(results_lst, model_names_lst = None, figsize = None):
         - For any one element of the list, the jth element of the value
           of each key (i.e. of the list corresponding to that key)
           corresponds to the results for the (j+1)th epoch.
+          
     model_names_lst : List[str] or None
         Contains list of names of the models whose results are in
         <results_lst>.
         - The ith element of <results_lst> is the dictionary of results
         for the model with a name given by the ith element of
         <model_names_lst>.
+        
     figsize: Tuple[float, float] or None
         Optional parameter for adjusting figure size.
+    
+    model_params: Dict[str : Dict[str: float]] or None
+        Contains hyperparameter names and corresponding values for each model
+        in results_lst. 
+        - Assumed that the names are in "model_i" format where i is the index of
+        the corresponding model's results in <results_lst>.
+        - Used in the title of the plots if given, and left out otherwise.
+    
+    important_params: Dict[str : int] or None
+        Contains names/keys of important parameters and corresponding index to
+        their value in <model_params> so that only those values from 
+        <model_params> will be printed. If not given, function will just
+        print all parameters.
+    
 
     Returns
     -------
@@ -293,8 +310,6 @@ def compare_results_2(results_lst, model_names_lst = None, figsize = None):
         if len(model_results[key]) > max_len:
             max_len = len(model_results[key])
     epochs = range(1, max_len+1) # array for x-axis
-    print(max_len)
-    print(len(epochs))
     
     # Create plot
     n = len(results_lst)
@@ -311,24 +326,39 @@ def compare_results_2(results_lst, model_names_lst = None, figsize = None):
     plot_num = 0
     for i, model_results in enumerate(results_lst):
         for j, keys in enumerate(keys_lst):
+            # Get model name for title
             if model_names_lst:
                 model_name = model_names_lst[i]
             else:
-                model_name = "Model " + str(i)
+                model_name = "model_" + str(i)
+            
+            # Get model parameters for title (if available)
+            title_part_2 = ""
+            if model_params:
+                title_part_2 += "\n"
                 
+                # if important parameters are specified
+                if important_params: # if you only want to print specific parameters
+                    param_keys_lst = important_params.items()
+                else:
+                    param_keys_lst = zip(model_params[model_name].keys(), range(len(model_params[model_name].keys())))
+                
+                # Add parameter names and values to title
+                for param_name, idx in param_keys_lst:
+                    title_part_2 += param_name + " = " + str(model_params[model_name][idx]) + " | "
+                title_part_2 = title_part_2[:-2]
+            
+            # Plot results and title
             plot_num += 1
             plt.subplot(rows, cols, plot_num)
             plt.plot(epochs, model_results[keys[0]], label = keys[0])
             plt.plot(epochs, model_results[keys[1]], label = keys[1])
-            plt.title(model_name + " - " + keys[2])
+            plt.title(model_name + " - " + keys[2] + title_part_2)
+            plt.xlim(epochs[0], epochs[-1])
+            if "Acc" in keys[2]:
+                plt.ylim(0.25, 1)
             plt.legend()
     return
 
 
-            
-            
-            
-    
-    
-    
-    
+
