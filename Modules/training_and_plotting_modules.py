@@ -251,7 +251,7 @@ def compare_results(results_lst, model_names_lst = None):
         plt.legend()
     return
 
-def compare_results_2(results_lst, model_names_lst = None):
+def compare_results_2(results_lst, model_names_lst = None, figsize = None):
     """
     Plots results of all the models whose results are given in <results_lst>
     on one plot so they can be seen side-by-side.
@@ -278,6 +278,8 @@ def compare_results_2(results_lst, model_names_lst = None):
         - The ith element of <results_lst> is the dictionary of results
         for the model with a name given by the ith element of
         <model_names_lst>.
+    figsize: Tuple[float, float] or None
+        Optional parameter for adjusting figure size.
 
     Returns
     -------
@@ -292,6 +294,7 @@ def compare_results_2(results_lst, model_names_lst = None):
             max_len = len(model_results[key])
     epochs = range(1, max_len+1) # array for x-axis
     print(max_len)
+    print(len(epochs))
     
     # Create plot
     n = len(results_lst)
@@ -300,7 +303,10 @@ def compare_results_2(results_lst, model_names_lst = None):
     rows = n
     cols = len(keys_lst)
     
-    plt.figure(figsize = (4*n, 10))
+    if figsize:
+        plt.figure(figsize = (7*cols, 4*rows))
+    else:
+        plt.figure(figsize = figsize)
     
     plot_num = 0
     for i, model_results in enumerate(results_lst):
