@@ -221,10 +221,10 @@ def compare_results(results_lst, model_names_lst = None):
     """
     max_len = 0
     # find maximum number of epochs
-    key = next(iter(results_lst.keys()))
+    key = next(iter(results_lst[0].keys()))
     for model_results in results_lst:
         if len(model_results[key]) > max_len:
-            max_len = len(model_results)
+            max_len = len(model_results[key])
     epochs = range(1, max_len+1) # array for x-axis
     
     # Create plot
@@ -286,10 +286,10 @@ def compare_results_2(results_lst, model_names_lst = None):
     """
     max_len = 0
     # find maximum number of epochs
-    key = next(iter(results_lst.keys()))
+    key = next(iter(results_lst[0].keys()))
     for model_results in results_lst:
         if len(model_results[key]) > max_len:
-            max_len = len(model_results)
+            max_len = len(model_results[key])
     epochs = range(1, max_len+1) # array for x-axis
     print(max_len)
     
