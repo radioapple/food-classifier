@@ -69,6 +69,8 @@ For viewing the relation between training accuracy and loss or testing accuracy 
 
 **Figure 1.2: Accuracy vs loss plot.**
 
+**Note:** The dashed lines in figure 1.2 are a bit arbitrary and only there to make it easier to separate points into high accuracy - loss loss, high accuracy - high loss, etc.
+
 Generally, the closer the test and training points are, the better the model since the closeness of the points indicates whether how appropriately our model fits the data (or possibly underfits). Further away points means that the model is overfitting (i.e. it fits training data better than test data) or there's some other issue causing testing accuracy to be better than the training accuracy. The former is due to not having much variation in the dataset or learning on the training dataset too quickly which leads to the model learning the training data very well, but not performing so well on unseen (test) data.
 
 Model Name | Distance
