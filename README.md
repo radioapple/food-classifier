@@ -69,22 +69,28 @@ For viewing the relation between training accuracy and loss or testing accuracy 
 
 **Figure 1.2: Accuracy vs loss plot.**
 
-**Note:** The dashed lines in figure 1.2 are a bit arbitrary and only there to make it easier to separate points into high accuracy - loss loss, high accuracy - high loss, etc.
+**Note:** The dashed lines in figure 1.2 are a bit arbitrary and only there to make it easier to separate points into high accuracy - loss loss, high accuracy - high loss, etc. Also note that the values that are plotted here are from table 1.1.
 
-Generally, the closer the test and training points are, the better the model since the closeness of the points indicates whether how appropriately our model fits the data (or possibly underfits). Further away points means that the model is overfitting (i.e. it fits training data better than test data) or there's some other issue causing testing accuracy to be better than the training accuracy. The former is due to not having much variation in the dataset or learning on the training dataset too quickly which leads to the model learning the training data very well, but not performing so well on unseen (test) data.
+Generally, the closer the test and training points are, the better the model since the closeness of the points indicates how appropriately our model fits the data (or possibly underfits). Further away points means that the model is overfitting (i.e. it fits training data better than test data) or there's some other issue causing testing accuracy to be better than the training accuracy. The former is due to not having much variation in the dataset or learning on the training dataset too quickly which leads to the model learning the training data very well, but not performing so well on unseen (test) data.
 
 Model Name | Distance
 ------------- | -------------
-model_5 |	0.00127
-model_2 |	0.00143
-model_4 |	0.00250
-model_3 |	0.00270
-model_0 |	0.00367
-model_6 |	0.00446
-model_1 |	0.01226
-model_7 |	0.01297
+model_5 | 0.0356
+model_2 | 0.0378
+model_4 | 0.0500
+model_3 | 0.0520
+model_0 | 0.0606
+model_6 | 0.0668
+model_1 | 0.111
+model_7 | 0.114
 
 **Table 1.2: Distance between the points (training loss, training accuracy) and (testing loss, testing accuracy) listed in ascending order from top to bottom.**
+
+The distance was calculated using the standard euclidean distance formula:
+
+$$\text{distance}_i = \sqrt{(\text{training accuracy}_i - \text{test accuracy}_i)^2 + (\text{training loss}_i - \text{test loss}_i)^2}$$
+
+where $i$ is the number of the model.
 
 Organizing the points in figure 1.2 gives us table 1.2. This shows us that models 3 to 5 have training and testing loss and accuracy values the closest to each other.
 
