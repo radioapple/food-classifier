@@ -10,11 +10,16 @@ Currently, this repository only contains results for a model trained on 3 classe
 ## Outline
 This repository contains (or will contain) two sections:
 
-1. Experiment
-2. Final Model
+1. [Experiment](#1---experiment)
+    * [1.1 - Results](#i-loss--accuracy-curves)
+      1. [Loss & Accuracy Curves](#i-loss--accuracy-curves)
+      2. [Training and Test Loss & Accuracy Values](#ii-training-and-test-loss--accuracy-values)
+      3. [Accuracy vs. Loss Plot](#iii-accuracy-vs-loss-plot)
+      4. [Best Model](#iv-best-model)
+2. [Final Model](#2---final-model)
 
 ## 1 - Experiment
-This section contains the "experimental" part of the project. The experiment involves testing the convolutional neural network with various
+This section contains the experimental part of the project. The experiment involves testing the convolutional neural network with various
 hyperparameter combinations on a subset of the full dataset.
 
 The subset of the dataset only contains 3 classes and 50% of the images per class. I.e., there are 375 training images and 125 testing images per class,
@@ -34,18 +39,18 @@ There are a total of 8 different hyperparameter combinations that were tested. T
 **Figure 1.1: Loss and accuracy curves for each model.**
 
 ### (ii) Training and Test Loss & Accuracy Values
-Note: The following values are averaged over the last 5 epochs to avoid issues from fluctuating loss or accuracy values
+**Note:** The following values are averaged over the last 5 epochs to avoid issues from fluctuating loss or accuracy values
 
 Model Name|train_loss|	train_acc|	test_loss|	test_acc|
 :---:|:---:|:---:|:---:|:---:
-model_0 |	0.52|	80.3%|	0.564333|	76.6%
-model_1	| 0.52|	79.8%|	0.614360|	74.5%
-model_2	| 0.58|	77.2%|	0.546078|	78.4%
-model_3	| 0.66|	73.0%|	0.618985| 76.2%
-model_4 |	0.76|	66.6%|	0.720846|	69.2%
-model_5	| 0.74|	68.0%|	0.713106|	69.7%
-model_6	| 0.74|	68.5%|	0.681492|	72.2%
-model_7	| 0.80|	64.8%|	0.706107|	71.2%
+model_0 |	0.52|	80.3%|	0.56|	76.6%
+model_1	| 0.52|	79.8%|	0.61|	74.5%
+model_2	| 0.58|	77.2%|	0.55|	78.4%
+model_3	| 0.66|	73.0%|	0.62| 76.2%
+model_4 |	0.76|	66.6%|	0.72|	69.2%
+model_5	| 0.74|	68.0%|	0.71|	69.7%
+model_6	| 0.74|	68.5%|	0.68|	72.2%
+model_7	| 0.80|	64.8%|	0.71|	71.2%
 
 **Table 1.1: Training and test loss and accuracy values averaged over the last 5 epochs.**
 
@@ -55,7 +60,7 @@ There are some models that do better on the training data than they do on the te
 
 There are also models that are doing better on the testing data than they are on the training data. This is likely due to the fact that those models use augmentation which is introducing a lot of errors into the training data labels but is at least preparing our model well for unseen results.
 
-** TODO: ** Look into this problem further to see if testing accuracy > training accuracy is really an issue.
+**TODO:** Look into this problem further to see if testing accuracy > training accuracy is really an issue.
 
 ### (iii) Accuracy vs. Loss Plot
 For viewing the relation between training accuracy and loss or testing accuracy and loss, we look at the following plot:
@@ -67,14 +72,15 @@ For viewing the relation between training accuracy and loss or testing accuracy 
 Generally, the closer the test and training points are, the better the model since the closeness of the points indicates whether how appropriately our model fits the data (or possibly underfits). Further away points means that the model is overfitting (i.e. it fits training data better than test data) or there's some other issue causing testing accuracy to be better than the training accuracy. The former is due to not having much variation in the dataset or learning on the training dataset too quickly which leads to the model learning the training data very well, but not performing so well on unseen (test) data.
 
 Model Name | Distance
-model_5 |	0.001270
-model_2 |	0.001430
-model_4 |	0.002501
-model_3 |	0.002704
-model_0 |	0.003673
-model_6 |	0.004464
-model_1 |	0.012261
-model_7 |	0.012970
+------------- | -------------
+model_5 |	0.00127
+model_2 |	0.00143
+model_4 |	0.00250
+model_3 |	0.00270
+model_0 |	0.00367
+model_6 |	0.00446
+model_1 |	0.01226
+model_7 |	0.01297
 
 **Table 1.2: Distance between the points (training loss, training accuracy) and (testing loss, testing accuracy) listed in ascending order from top to bottom.**
 
@@ -92,6 +98,6 @@ It would appear that `model_2` is the best model. The hyperparameters for `model
 
 We will try these hyperparameters out for our final model.
 
-## Final Model
+## 2 - Final Model
 
 ...Coming soon...
