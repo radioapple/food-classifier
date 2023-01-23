@@ -21,7 +21,7 @@ The subset of the dataset only contains 3 classes and 50% of the images per clas
 for a total of 1500 images.
 
 There are a total of 8 different hyperparameter combinations that were tested. The hyperparameters that were varied were: the augmentation intensity, the
-`p` value for the one dropout layer (i.e. how many neurons get dropped), and the learning rate.
+`p` value for the one dropout layer (i.e. how many neurons get dropped), and the learning rate (for the `torch.optim.Adam` optimizer).
 
 ## 1.1 - Results
 
@@ -85,7 +85,12 @@ Based on the following criteria:
 1. The best model must have one of the highest testing accuracies
 2. The best model must also be fitting appropriately
 
-It would appear that `model_2` is the best model.
+It would appear that `model_2` is the best model. The hyperparameters for `model_2` are
+* augmentation intensity = 0
+* dropout value = 0.5
+* learning rate = 0.001
+
+We will try these hyperparameters out for our final model.
 
 ## Final Model
 
