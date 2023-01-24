@@ -10,16 +10,21 @@ Currently, this repository only contains results for a model trained on 3 classe
 ## Outline
 This repository contains (or will contain) two sections:
 
-1. [Experiment](#1---experiment)
-    * [1.1 - Results](README.md#11---results)
-      1. [Loss & Accuracy Curves](#i-loss--accuracy-curves)
-      2. [Training and Test Loss & Accuracy Values](#ii-training-and-test-loss--accuracy-values)
-      3. [Accuracy vs. Loss Plot](#iii-accuracy-vs-loss-plot)
-      4. [Best Model](#iv-best-model)
-   * [1.2 - Experiment's Final Model Results](README.md#12---experiments-final-model-results)
-      1. [Training and Test Loss & Accuracy Values](#i-training-and-test-loss--accuracy-values)
-      2. [Loss & Accuracy Curves](README.md#ii-loss--accuracy-curves)
-2. [Final Model](#2---final-model)
+1. [**Experiment**](#1---experiment)
+ * [1.1 - Experiment Results](README.md#11---experiment-results)
+   1. [Loss & Accuracy Curves](#i-loss--accuracy-curves)
+   2. [Training and Test Loss & Accuracy Values](#ii-training-and-test-loss--accuracy-values)
+   3. [Accuracy vs. Loss Plot](#iii-accuracy-vs-loss-plot)
+   4. [Best Model](#iv-best-model)
+ * [1.2 - Experiment's Final Model Results](README.md#12---experiments-final-model-results)
+   1. [Training and Test Loss & Accuracy Values](#i-training-and-test-loss--accuracy-values)
+   2. [Loss & Accuracy Curves](README.md#ii-loss--accuracy-curves)
+ * [1.3 - False Ending, More Experimenting](README.md#13---false-ending-more-experimenting)
+   1. [Training and Test Loss & Accuracy Values](README.md#i-training-and-test-loss--accuracy-values-1)
+   2. [Loss & Accuracy Curves](README.md#ii-loss--accuracy-curves-1)
+   3. [Predictions on Test Data Visualized](README.md#iii-predictions-on-test-data-visualized)
+   4. [ Confusion Matrix](README.md#iv-confusion-matrix)
+2. [**Final Model**](#2---final-model)
 
 ## 1 - Experiment
 This section contains the experimental part of the project. The experiment involves testing the convolutional neural network with various
@@ -31,7 +36,7 @@ for a total of 1500 images.
 There are a total of 8 different hyperparameter combinations that were tested. The hyperparameters that were varied were: the augmentation intensity, the
 `p` value for the one dropout layer (i.e. how many neurons get dropped), and the learning rate (for the `torch.optim.Adam` optimizer).
 
-### 1.1 - Results
+### 1.1 - Experiment Results
 
 #### (i) Loss & Accuracy Curves
 
@@ -39,7 +44,7 @@ There are a total of 8 different hyperparameter combinations that were tested. T
 :-------------------------:|:-------------------------:
 ![image](https://user-images.githubusercontent.com/104711470/213962088-f50e7944-44ca-4d7c-9102-a693cec0c70f.png)  |  ![image](https://user-images.githubusercontent.com/104711470/213962160-8c35eb88-ead5-4a62-a2ce-a9ac444d3fc4.png)
 
-**Figure 1.1: Loss and accuracy curves for each model.**
+**Figure 1.1:** Loss and accuracy curves for each model.
 
 #### (ii) Training and Test Loss & Accuracy Values
 **Note:** The following values are averaged over the last 5 epochs to avoid issues from fluctuating loss or accuracy values
@@ -55,7 +60,7 @@ model_5	| 0.74|	68.0%|	0.71|	69.7%
 model_6	| 0.74|	68.5%|	0.68|	72.2%
 model_7	| 0.80|	64.8%|	0.71|	71.2%
 
-**Table 1.1: Training and test loss and accuracy values averaged over the last 5 epochs.**
+**Table 1.1:** Training and test loss and accuracy values averaged over the last 5 epochs.
 
 From table 1.1, we can see that models 0 to 3 have the highest test accuracies. 
 
@@ -70,7 +75,7 @@ For viewing the relation between training accuracy and loss or testing accuracy 
 
 ![image](https://user-images.githubusercontent.com/104711470/213963071-bc8f9621-88b4-4bcb-9e01-faa64134e560.png)
 
-**Figure 1.2: Accuracy vs loss plot.**
+**Figure 1.2:** Accuracy vs loss plot.
 
 **Note:** The dashed lines in figure 1.2 are a bit arbitrary and only there to make it easier to separate points into high accuracy - loss loss, high accuracy - high loss, etc. Also note that the values that are plotted here are from table 1.1.
 
@@ -87,7 +92,7 @@ model_6 | 0.0668
 model_1 | 0.111
 model_7 | 0.114
 
-**Table 1.2: Distance between the points (training loss, training accuracy) and (testing loss, testing accuracy) listed in ascending order from top to bottom.**
+**Table 1.2:** Distance between the points (training loss, training accuracy) and (testing loss, testing accuracy) listed in ascending order from top to bottom.
 
 The distance was calculated using the standard euclidean distance formula:
 
@@ -135,6 +140,71 @@ It appears that training on 1500 more images and 10 more epochs than before gave
 From figure 1.3, we can see that accuracies don't increase much between epochs 30 and 40. 
 
 **TODO:** Need to look into why that is. This does explain why changing the epochs didn't change accuracy by much, but need to look into why doubling the dataset did nothing.
+
+### 1.3 - False Ending, More Experimenting
+After seeing the previous section's model not improve much in accuracy from before, I tried different hyperparameters again. I used the same dataset as in
+section 1.2, but I changed the following hyperparameters:
+* `hidden_units`: from 10 in section 1.1 -> 20 now
+* `learning_rate`: from 0.001 -> 0.002
+* `dropout_value`: from 0.5 -> 0.75
+The other hyperparameters remained the same.
+
+#### (i) Training and Test Loss & Accuracy Values
+
+train_loss|	train_acc|	test_loss|	test_acc
+---|---|---|---
+0.44	|83.0%|	0.36|	85.5%
+
+**Table 1.4:** Training and test accuracy and loss values for the final experimental model adjusted version.
+
+#### (ii) Loss & Accuracy Curves
+
+![image](https://user-images.githubusercontent.com/104711470/214232135-7b89d81c-dd82-42f4-b433-62a9195af2eb.png)
+
+**Figure 1.4:** Loss and accuracy curves for final experimental model adjusted version.
+
+#### (iii) Predictions on Test Data Visualized
+
+Here we look at what the model predicted for 10 different test images from each class. The correct prediction will have a green title and the wrong predictions will have a red title.
+
+![image](https://user-images.githubusercontent.com/104711470/214233451-00fe0df4-6d0e-4d03-998c-30bde5fafa6b.png)
+
+**Figure 1.5:** 10 test images for 'beef_carpaccio' class and their class as predicted by the adjusted final experimental model.
+
+
+![image](https://user-images.githubusercontent.com/104711470/214233921-075d9d33-379b-43a9-a4f9-6511e5931232.png)
+
+**Figure 1.6:** 10 test images for 'carrot_cake' class and their class as predicted by the adjusted final experimental model.
+
+
+![image](https://user-images.githubusercontent.com/104711470/214234192-82692aa2-32a7-4c59-b791-b9bbe4c8369a.png)
+
+**Figure 1.7:** 10 test images for 'ramen' class and their class as predicted by the adjusted final experimental model.
+
+It appears from figures 1.5-1.7 that the classes have the following accuracies:
+* 'beef_carpaccio' accuracy = 9/10
+* 'carrot_cake' accuracy = 7/10
+* 'ramen' accuracy = 8/10
+
+It seems that the model learned the 'beef_carpaccio' class very well, and didn't learn 'carrot_cake' very well. Let's take a look at the confusion matrix.
+
+#### (iv) Confusion Matrix
+
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/104711470/214237631-b50242b4-cd15-488a-9c6f-be25ad3f44eb.png" width = 400px/>
+</p>
+
+**Figure 1.7:** Confusion matrix of adjusted final experimental model.
+
+This tells us that the model learned 'beef_carpaccio' very well, but often tends to confuse other food items for `ramen`. Since there are 250 test images per class, this matrix also gives us the accuracies per class. They are summarized in table 1.5 below.
+
+Class Name | Accuracy
+---|---
+beef_carpaccio | 90.0%
+carrot_cake | 83.2%
+ramen| 83.2%
+
+**Table 1.5:** Accuracies per class for adjusted final experimental model.
 
 ## 2 - Final Model
 
