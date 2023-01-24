@@ -11,11 +11,14 @@ Currently, this repository only contains results for a model trained on 3 classe
 This repository contains (or will contain) two sections:
 
 1. [Experiment](#1---experiment)
-    * [1.1 - Results](#i-loss--accuracy-curves)
+    * [1.1 - Results](README.md#11---results)
       1. [Loss & Accuracy Curves](#i-loss--accuracy-curves)
       2. [Training and Test Loss & Accuracy Values](#ii-training-and-test-loss--accuracy-values)
       3. [Accuracy vs. Loss Plot](#iii-accuracy-vs-loss-plot)
       4. [Best Model](#iv-best-model)
+   * [1.2 - Experiment's Final Model Results](README.md#12---experiments-final-model-results)
+      1. [Training and Test Loss & Accuracy Values](#i-training-and-test-loss--accuracy-values)
+      2. [Loss & Accuracy Curves](README.md#ii-loss--accuracy-curves)
 2. [Final Model](#2---final-model)
 
 ## 1 - Experiment
@@ -28,9 +31,9 @@ for a total of 1500 images.
 There are a total of 8 different hyperparameter combinations that were tested. The hyperparameters that were varied were: the augmentation intensity, the
 `p` value for the one dropout layer (i.e. how many neurons get dropped), and the learning rate (for the `torch.optim.Adam` optimizer).
 
-## 1.1 - Results
+### 1.1 - Results
 
-### (i) Loss & Accuracy Curves
+#### (i) Loss & Accuracy Curves
 
 --         |  --
 :-------------------------:|:-------------------------:
@@ -38,7 +41,7 @@ There are a total of 8 different hyperparameter combinations that were tested. T
 
 **Figure 1.1: Loss and accuracy curves for each model.**
 
-### (ii) Training and Test Loss & Accuracy Values
+#### (ii) Training and Test Loss & Accuracy Values
 **Note:** The following values are averaged over the last 5 epochs to avoid issues from fluctuating loss or accuracy values
 
 Model Name|train_loss|	train_acc|	test_loss|	test_acc|
@@ -62,7 +65,7 @@ There are also models that are doing better on the testing data than they are on
 
 **TODO:** Look into this problem further to see if testing accuracy > training accuracy is really an issue.
 
-### (iii) Accuracy vs. Loss Plot
+#### (iii) Accuracy vs. Loss Plot
 For viewing the relation between training accuracy and loss or testing accuracy and loss, we look at the following plot:
 
 ![image](https://user-images.githubusercontent.com/104711470/213963071-bc8f9621-88b4-4bcb-9e01-faa64134e560.png)
@@ -94,7 +97,7 @@ where $i$ is the number of the model.
 
 Organizing the points in figure 1.2 gives us table 1.2. This shows us that models 3 to 5 have training and testing loss and accuracy values the closest to each other.
 
-### (iv) Best Model
+#### (iv) Best Model
 Based on the following criteria:
 1. The best model must have one of the highest testing accuracies
 2. The best model must also be fitting appropriately
@@ -105,6 +108,33 @@ It would appear that `model_2` is the best model. The hyperparameters for `model
 * learning rate = 0.001
 
 We will try these hyperparameters out for our final model.
+
+### 1.2 - Experiment's Final Model Results
+
+Here, I used the best model's hyperparameters to train the model again but this time, on a dataset containing all 1000 images per class, with 750 images for training and 250 for testing. Also note that the model was trained for 40 epochs. Total training time was 7.8 min (training device was set to "cuda").
+The results were
+
+#### (i) Training and Test Loss & Accuracy Values
+
+train_loss | train_acc |test_loss | test_acc    
+-----| -------- | ------| -------
+0.46 | 81.9% |  0.46 |  81.2%
+
+**Table 1.3:** Training and test accuracy and loss values for the final experimental model.
+
+It appears that training on 1500 more images and 10 more epochs than before gave only a very marginal improvement.
+
+**TODO:** Explore why that is.
+
+#### (ii) Loss & Accuracy Curves
+
+![image](https://user-images.githubusercontent.com/104711470/214213221-7c580b7f-dcfe-44d0-a0b7-822796329a9d.png)
+
+**Figure 1.3:** Loss and accuracy curves for final experimental model.
+
+From figure 1.3, we can see that accuracies don't increase much between epochs 30 and 40. 
+
+**TODO:** Need to look into why that is. This does explain why changing the epochs didn't change accuracy by much, but need to look into why doubling the dataset did nothing.
 
 ## 2 - Final Model
 
