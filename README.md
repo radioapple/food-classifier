@@ -38,6 +38,8 @@ There are a total of 8 different hyperparameter combinations that were tested. T
 
 ### 1.1 - Experiment Results
 
+**Note:** There was a bug in the code where I set it up so that the testing accuracies were evaluated using an augmented test dataset. It shouldn't be too much of an issue since it just means that the model does well on a variety of different images. We can also just check how these models do by loading in their state dicts from the files in the [food-classifier/Experiment/Experiment Results/model_state_dicts/](https://github.com/radioapple/food-classifier/tree/main/Experiment/Experiment%20Results/model_state_dicts) directory and then running them on the entire 500 images per class dataset (or even the full 1000 images if you want).
+
 #### (i) Loss & Accuracy Curves
 
 --         |  --
@@ -69,6 +71,8 @@ There are some models that do better on the training data than they do on the te
 There are also models that are doing better on the testing data than they are on the training data. This is likely due to the fact that those models use augmentation which is introducing a lot of errors into the training data labels but is at least preparing our model well for unseen results.
 
 **TODO:** Look into this problem further to see if testing accuracy > training accuracy is really an issue.
+
+**Explanation:** It likely isn't a bad thing at all. The training accuracy was evaluated without `torch.inference_mode()` meaning that the dropout layer was active when calculating these values. The testing accuracy was evaluated using `torch.inference_mode()` so it will naturally be higher, assuming our model did a good job of learning from the training data. To test if this is really the case, I will have to use the models again but this time, test it on the entire 500 images per class dataset to see how it does (the training dataset was set up randomly, we won't be able to retrieve it, hence why we'll look at the entire dataset).
 
 #### (iii) Accuracy vs. Loss Plot
 For viewing the relation between training accuracy and loss or testing accuracy and loss, we look at the following plot:
@@ -117,7 +121,11 @@ We will try these hyperparameters out for our final model.
 ### 1.2 - Experiment's Final Model Results
 
 Here, I used the best model's hyperparameters to train the model again but this time, on a dataset containing all 1000 images per class, with 750 images for training and 250 for testing. Also note that the model was trained for 40 epochs. Total training time was 7.8 min (training device was set to "cuda").
-The results were
+
+Just to reiterate, the hyperparameters for `model_2`, and thus also for the final model, are
+* augmentation intensity = 0
+* dropout value = 0.5
+* learning rate = 0.001
 
 #### (i) Training and Test Loss & Accuracy Values
 
@@ -157,11 +165,16 @@ train_loss|	train_acc|	test_loss|	test_acc
 
 **Table 1.4:** Training and test accuracy and loss values for the final experimental model adjusted version.
 
+The improvement from the final model to the adjusted final model is 4.3%. Marginal, but still indicates that our change in hyperparameters helped. The higher learning rate and increased number of hidden units would lead to faster learning, but the increased dropout value makes it so that it's not so fast as to overfit. Getting lucky with the trade-off between the three is likely what lead to the marginal improvement.
+
 #### (ii) Loss & Accuracy Curves
 
 ![image](https://user-images.githubusercontent.com/104711470/214232135-7b89d81c-dd82-42f4-b433-62a9195af2eb.png)
 
 **Figure 1.4:** Loss and accuracy curves for final experimental model adjusted version.
+
+The significant difference between the training and testing accuracies in figure 1.4 is due to the large dropout value. The training accuracies were calculated with the dropout layer activated, while the testing accuracies were calculated with the dropout layer turned off. Since our model learned well, it will naturally end up doing worse with the dropout layer on.
+
 
 #### (iii) Predictions on Test Data Visualized
 
@@ -196,7 +209,9 @@ It seems that the model learned the 'beef_carpaccio' class very well, and didn't
 
 **Figure 1.7:** Confusion matrix of adjusted final experimental model.
 
-This tells us that the model learned 'beef_carpaccio' very well, but often tends to confuse other food items for `ramen`. Since there are 250 test images per class, this matrix also gives us the accuracies per class. They are summarized in table 1.5 below.
+This tells us that the model learned 'beef_carpaccio' very well, but often tends to confuse other food items for `ramen`. This is likely due to the fact that beef carpaccio has a different colour from ramen and carrot cake, which are more similar in colour. Ramen also consists of many different food items with a variety of shapes, so it is more likely to get confused with other food items. 
+
+Since there are 250 test images per class, this matrix also gives us the accuracies per class. They are summarized in table 1.5 below.
 
 Class Name | Accuracy
 ---|---
