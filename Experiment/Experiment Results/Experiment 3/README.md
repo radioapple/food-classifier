@@ -13,6 +13,7 @@ In this experiment, we will try out different model architectures to see which i
 3. [**Results**](#results)
    1. [Loss Curves](#i-loss-curves)
    2. [Accuracy vs. Loss](#ii-accuracy-vs-loss)
+4. [**Discussion**](#discussion)
 
 ## Introduction
 
@@ -124,7 +125,6 @@ Model Name | train_loss |	train_acc |	test_loss |	test_acc
 
 ## Discussion
 
-It seems that a CNN model with 3 convolutional blocks, and 2 convolutional layers per block, with a dropout layer with `p=0.5` gives us the best performance
-over a 10 epoch range. However, in the full run with 40 epochs and on the full 1000 images per class for 3 classes dataset, the performance of the best model
-was worse than the 2 blocks, 2 layers model from experiment 1 by 5% (the one shown in [figure 1.3 in the experiment 1 report](https://github.com/radioapple/food-classifier/edit/main/README.md#ii-loss--accuracy-curves) 
-since it has the same hyperparameter values as `final_model` other than the `conv_kernel_size` and model architecture). We also seem to have a similar almost plateau in performance as before.
+It seems that a CNN model with 3 blocks, and 2 layers per block with `dropout_value = 0.5` gives us the best performance over a 10 epoch range. However, in the full run with 40 epochs and on the full 1000 images per class for 3 classes dataset, the performance of the best model was worse than the 2 blocks, 2 layers model from experiment 1 by 5% (the one shown in [figure 1.3 in the experiment 1 report](https://github.com/radioapple/food-classifier/edit/main/README.md#ii-loss--accuracy-curves)). We also seem to have a similar almost plateau in performance as before. The number of trainable parameters in the experiment 1 model is 8,083, whereas `final_model` has 15,063 trainable parameters. This tells us that the increased complexity of `final_model` from the experiment 1 model is unnecessary.
+
+**TODO:** Figure out what that implies about whether we need more data, need to change other hyperparameters, or other actions we need to take.
