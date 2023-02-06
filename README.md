@@ -36,6 +36,12 @@ for a total of 1500 images.
 There are a total of 8 different hyperparameter combinations that were tested. The hyperparameters that were varied were: the augmentation intensity, the
 `p` value for the one dropout layer (i.e. how many neurons get dropped), and the learning rate (for the `torch.optim.Adam` optimizer).
 
+The following model architecture was used:
+
+![CNN Arch - Exp 1 - 2b 2l labelled](https://user-images.githubusercontent.com/104711470/216860485-1e57270c-fac1-4ad7-8b61-659fd5c71d12.png)
+
+**Figure 0.1:** CNN model architecture for experiment 1.
+
 ### 1.1 - Experiment Results
 
 **Note:** There was a bug in the code where I set it up so that the testing accuracies were evaluated using an augmented test dataset. It shouldn't be too much of an issue since it just means that the model does well on a variety of different images. We can also just check how these models do by loading in their state dicts from the files in the [food-classifier/Experiment/Experiment Results/model_state_dicts/](https://github.com/radioapple/food-classifier/tree/main/Experiment/Experiment%20Results/model_state_dicts) directory and then running them on the entire 500 images per class dataset (or even the full 1000 images if you want).
