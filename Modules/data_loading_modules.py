@@ -97,8 +97,8 @@ def extract_zipfile(file_path: str or Path,
     from pathlib import Path
             
     # --- Create directory, if name given ---
+    print(directory_name)
     if directory_name:
-        print(directory_name)
         dir_path = Path(directory_name)
         
         # Create directory, if it doesn't already exist
