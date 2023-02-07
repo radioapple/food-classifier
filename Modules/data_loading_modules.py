@@ -379,7 +379,7 @@ def rearrange_files(images_path: str or Path,
         shutil.rmtree(uneccessary_folder)
         
     for x in sorted(classes_paths):
-        path = images_path / classes_paths[x]
+        path = classes_paths[x]
         shutil.rmtree(path)
         
     return train_path, test_path, *train_test_paths
