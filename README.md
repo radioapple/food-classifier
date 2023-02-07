@@ -10,7 +10,7 @@ Currently, this repository only contains results for a model trained on 3 classe
 ## Outline
 This repository contains (or will contain) two sections:
 
-1. [**Experiment**](#1---experiment)
+1. [**Experiment 1**](#1---experiment-1)
  * [1.1 - Experiment Results](README.md#11---experiment-results)
    1. [Loss & Accuracy Curves](#i-loss--accuracy-curves)
    2. [Training and Test Loss & Accuracy Values](#ii-training-and-test-loss--accuracy-values)
@@ -24,10 +24,11 @@ This repository contains (or will contain) two sections:
    2. [Loss & Accuracy Curves](README.md#ii-loss--accuracy-curves-1)
    3. [Predictions on Test Data Visualized](README.md#iii-predictions-on-test-data-visualized)
    4. [ Confusion Matrix](README.md#iv-confusion-matrix)
-2. [**Final Model**](#2---final-model)
+2. [**Experiment 2**](#2---experiment-2)
+3. [**Final Model**](#3---final-model)
 
-## 1 - Experiment
-This section contains the experimental part of the project. The experiment involves testing the convolutional neural network with various
+## 1 - Experiment 1
+This section contains the first experimental part of the project. The first experiment involves testing the convolutional neural network with various
 hyperparameter combinations on a subset of the full dataset.
 
 The subset of the dataset only contains 3 classes and 50% of the images per class. I.e., there are 375 training images and 125 testing images per class,
@@ -227,6 +228,10 @@ ramen| 83.2%
 
 **Table 1.5:** Accuracies per class for adjusted final experimental model.
 
-## 2 - Final Model
+## 2 - Experiment 2
+
+This section contains the second experimental part of the project. The second experiment involves testing the convolutional neural network with different model architectures. The README file for this section is contained in the [food-classifier/Experiment/Experiment Results/Experiment 2/](https://github.com/radioapple/food-classifier/tree/main/Experiment/Experiment%20Results/Experiment%202) directory.
+
+## 3 - Final Model
 
 ...Coming soon...
