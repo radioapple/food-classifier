@@ -1,4 +1,4 @@
-# Experiment 3
+# Experiment 2
 
 In this experiment, we will try out different model architectures to see which improves accuracy on the [Food101 dataset](https://data.vision.ee.ethz.ch/cvl/datasets_extra/food-101/#:~:text=The%20Food%2D101%20Data%20Set).
 
