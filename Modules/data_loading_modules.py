@@ -277,9 +277,9 @@ def get_meta_data(meta_path: str or Path):
     
 # ===== Rearrange Files into "images/train/class_name/image_name.jpg" format =====
 def rearrange_files(images_path: str or Path, 
-                    class_names: list[str], 
-                    train_data_paths_dict: dict[str: Path], 
-                    test_data_paths_dict: dict[str: Path],
+                    class_names: list, 
+                    train_data_paths_dict: dict, 
+                    test_data_paths_dict: dict,
                     percent: float = None,
                     print_steps: bool = False):
     """
@@ -416,7 +416,7 @@ def get_image_paths_list(images_path: str or Path):
 
 # ===== Print information about the dataset after everything else =====
 def print_info(class_names: list,
-               train_test_paths: list[dict[str: Path]],
+               train_test_paths: list,
                image_paths_list: list):
     """
     Prints information about how many classes there are,
