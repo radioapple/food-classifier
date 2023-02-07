@@ -217,7 +217,7 @@ def get_directory_paths(dataset_dir_name: str or Path):
         and meta directory respectively.
     """
     if type(dataset_dir_name) is str:
-        import Path
+        from pathlib import Path
         dataset_dir_name = Path(dataset_dir_name)
         
     # Creating main directory paths
@@ -250,7 +250,7 @@ def get_meta_data(meta_path: str or Path):
     import json
     
     if type(meta_path) is str:
-        import Path
+        from pathlib import Path
         meta_path = Path(meta_path)
         
     # Getting list of files in the 'food-101/meta' directory
@@ -320,7 +320,7 @@ def rearrange_files(images_path: str or Path,
     import random
     
     if type(images_path) is str:
-        import Path
+        from pathlib import import Path
         images_path = Path(images_path)
         
     # Train and test directories
@@ -407,7 +407,7 @@ def get_image_paths_list(images_path: str or Path):
         A list containing paths to all images in the dataset.
     """
     if type(images_path) is str:
-        import Path
+        from pathlib import Path
         images_path = Path(images_path)
     
     image_paths_list = list(images_path.glob("*/*/*.jpg"))
