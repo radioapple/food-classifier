@@ -341,10 +341,10 @@ def rearrange_files(images_path: str or Path,
             if paths[class_name].is_dir():
                 if print_steps:
                     print(f"Directory '{paths[class_name]}' already exists, skipping creation.")
-                else:
-                    paths[class_name].mkdir(parents = True, exist_ok = True)
-                    if print_steps:
-                        print(f"Directory '{paths[class_name]}' created.")
+            else:
+                paths[class_name].mkdir(parents = True, exist_ok = True)
+                if print_steps:
+                    print(f"Directory '{paths[class_name]}' created.")
 
     # Move images into train and test folders instead
     if print_steps:
