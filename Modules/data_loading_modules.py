@@ -97,7 +97,6 @@ def extract_zipfile(file_path: str or Path,
     from pathlib import Path
             
     # --- Create directory, if name given ---
-    print(directory_name)
     if directory_name:
         dir_path = Path(directory_name)
         
@@ -320,7 +319,7 @@ def rearrange_files(images_path: str or Path,
     import random
     
     if type(images_path) is str:
-        from pathlib import import Path
+        from pathlib import Path
         images_path = Path(images_path)
         
     # Train and test directories
