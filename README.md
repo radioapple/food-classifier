@@ -40,7 +40,7 @@ The following model architecture was used:
 
 ![CNN Arch - Exp 1 - 2b 2l labelled](https://user-images.githubusercontent.com/104711470/216860485-1e57270c-fac1-4ad7-8b61-659fd5c71d12.png)
 
-**Figure 0.1:** CNN model architecture for experiment 1.
+**Figure 0.1:** CNN model architecture for experiment 1. Uses `kernel_size = 3`, `stride = 1`, and `padding = 0` for the Conv2d layers, and `kernel_size = 2` for the MaxPool2d layers.
 
 ### 1.1 - Experiment Results
 
