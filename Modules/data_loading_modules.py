@@ -30,7 +30,7 @@ def import_full_dataset(directory_name: str = None,
     from pathlib import Path
     
     # Creating directory, if name is given
-    if not directory_name:
+    if directory_name:
         dir_path = Path(directory_name)
         data_path = dir_path / "food101.tar.gz"
         
@@ -97,7 +97,7 @@ def extract_zipfile(file_path: str or Path,
     from pathlib import Path
             
     # --- Create directory, if name given ---
-    if not directory_name:
+    if directory_name:
         dir_path = Path(directory_name)
         
         # Create directory, if it doesn't already exist
@@ -124,7 +124,7 @@ def extract_zipfile(file_path: str or Path,
     
     # --- Return --
     if return_data_path:
-        if not dir_path:
+        if dir_path:
             return dir_path / data_path
         else:
             return data_path
@@ -162,7 +162,7 @@ def extract_tarfile(file_path: str or Path,
     import tarfile
     from pathlib import Path
     # --- Create directory, if name given ---
-    if not directory_name:
+    if directory_name:
         dir_path = Path(directory_name)
         
         # Create directory, if it doesn't already exist
@@ -182,7 +182,7 @@ def extract_tarfile(file_path: str or Path,
     if print_steps:
         print(f"Extracting {file_path}...")
     tar = tarfile.open(file_path)
-    if not dir_path:
+    if dir_path:
         tar.extractall(dir_path)
         data_path = dir_path / (tar.get_names()[0])
     else:
@@ -359,7 +359,7 @@ def rearrange_files(images_path: str or Path,
             destination_dir_path = test_path
 
         for class_name in sorted(paths):
-            if not percent:
+            if percent:
                 subset_length = int(percent * len(arr[class_name]))
                 sub_arr = random.sample(arr[class_name], k = subset_length)
             else:
