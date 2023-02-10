@@ -184,10 +184,10 @@ def extract_tarfile(file_path: str or Path,
     tar = tarfile.open(file_path)
     if dir_path:
         tar.extractall(dir_path)
-        data_path = dir_path / (tar.get_names()[0])
+        data_path = dir_path / (tar.getnames()[0])
     else:
         tar.extractall()
-        data_path = Path(tar.get_names()[0])
+        data_path = Path(tar.getnames()[0])
     tar.close()
     if print_steps:
         print(f"Finished extracting {file_path}.")
@@ -269,6 +269,8 @@ def get_meta_data(meta_path: str or Path):
     # Based the order off of order that file names appear in meta_filenames_list
     lst_keys = ['class_names', 'labels','test_data_paths_dict', 'test_data_paths_lst', \
         'train_data_paths_dict', 'train_data_paths_lst']
+    print("meta_filenames_list:", meta_filenames_list)
+    print("\nlst_keys:", lst_keys)
     meta_data_dict = {}
     meta_data_dict.update(zip(lst_keys, meta_files_data))
     
