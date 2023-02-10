@@ -253,7 +253,16 @@ def get_meta_data(meta_path: str or Path):
         meta_path = Path(meta_path)
         
     # Getting list of files in the 'food-101/meta' directory
-    meta_filenames_list = sorted(list(meta_path.glob("*")))[1:] # ignoring the README file
+    meta_filenames_list_init = sorted(list(meta_path.glob("*"))) # ignoring the README file
+    
+    # Only keep files that we need
+    files_to_keep = ["classes.txt", "labels.txt", "test.json", "test.txt", "train.json", "train.txt"]
+    meta_filenames_list = []
+    for file_name in meta_filenames_list_init:
+        for file_to_keep in files_to_keep:
+            if file_to_keep in str(file_name):
+                meta_filenames_list.append(file_name)
+                break
     
     # Compile data into an array
     meta_files_data = []
