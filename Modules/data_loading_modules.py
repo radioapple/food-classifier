@@ -571,7 +571,7 @@ def load_and_extract_data(file_path: str or Path = None,
     
     # ------- Get Meta Data -------
     meta_data = get_meta_data(meta_path)
-    
+    return 1
     # ------- Rearrange Files -------
     train_path, test_path, train_paths, test_paths = \
         rearrange_files(images_path = images_path, 
