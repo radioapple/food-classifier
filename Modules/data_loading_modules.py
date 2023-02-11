@@ -580,30 +580,30 @@ def load_and_extract_data(file_path: str or Path = None,
     
     # ------- Get Meta Data -------
     meta_data = get_meta_data(meta_path)
-    return 1
-    # # ------- Rearrange Files -------
-    # train_path, test_path, train_paths, test_paths = \
-    #     rearrange_files(images_path = images_path, 
-    #                     class_names = meta_data['class_names'], 
-    #                     train_data_paths_dict = meta_data['train_data_paths_dict'], 
-    #                     test_data_paths_dict = meta_data['test_data_paths_dict'],
-    #                     percent = percent,
-    #                     print_steps = print_steps_rearranging)
     
-    # # ------- Get all image paths -------
-    # image_paths_list = get_image_paths_list(images_path = images_path)
+    # ------- Rearrange Files -------
+    train_path, test_path, train_paths, test_paths = \
+        rearrange_files(images_path = images_path, 
+                        class_names = meta_data['class_names'], 
+                        train_data_paths_dict = meta_data['train_data_paths_dict'], 
+                        test_data_paths_dict = meta_data['test_data_paths_dict'],
+                        percent = percent,
+                        print_steps = print_steps_rearranging)
     
-    # # ------- Print information about dataset -------
-    # if get_info:
-    #     print_info(class_names = meta_data['class_names'], 
-    #                train_test_paths = [train_paths, test_paths], 
-    #                image_paths_list = image_paths_list)
+    # ------- Get all image paths -------
+    image_paths_list = get_image_paths_list(images_path = images_path)
     
-    # # ------- Return all important data -------
-    # result_keys = ['data_path', 'images_path', 'meta_path', 'train_path', 'test_path', \
-    #                'meta_data', 'train_paths', 'test_paths', 'image_paths_list']
-    # results_lst = [data_path, images_path, meta_path, train_path, test_path, \
-    #                meta_data, train_paths, test_paths, image_paths_list]
-    # result = dict(zip(result_keys, results_lst))
+    # ------- Print information about dataset -------
+    if get_info:
+        print_info(class_names = meta_data['class_names'], 
+                    train_test_paths = [train_paths, test_paths], 
+                    image_paths_list = image_paths_list)
     
-    # return result
+    # ------- Return all important data -------
+    result_keys = ['data_path', 'images_path', 'meta_path', 'train_path', 'test_path', \
+                    'meta_data', 'train_paths', 'test_paths', 'image_paths_list']
+    results_lst = [data_path, images_path, meta_path, train_path, test_path, \
+                    meta_data, train_paths, test_paths, image_paths_list]
+    result = dict(zip(result_keys, results_lst))
+    
+    return result
