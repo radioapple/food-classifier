@@ -45,7 +45,7 @@ The following model architecture was used:
 
 ### 1.1 - Experiment Results
 
-**Note:** There was a bug in the code where I set it up so that the testing accuracies were evaluated using an augmented test dataset. It shouldn't be too much of an issue since it just means that the model does well on a variety of different images. We can also just check how these models do by loading in their state dicts from the files in the [food-classifier/Experiment/Experiment Results/model_state_dicts/](https://github.com/radioapple/food-classifier/tree/main/Experiment/Experiment%20Results/model_state_dicts) directory and then running them on the entire 500 images per class dataset (or even the full 1000 images if you want).
+**Note:** There was a bug in the code where I set it up so that the testing accuracies were evaluated using an augmented test dataset. It shouldn't be too much of an issue since it just means that the model does well on a variety of different images.
 
 #### (i) Loss & Accuracy Curves
 
