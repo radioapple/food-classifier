@@ -45,7 +45,7 @@ The following model architecture was used:
 
 ### 1.1 - Experiment Results
 
-**Note:** There was a bug in the code where I set it up so that the testing accuracies were evaluated using an augmented test dataset. It shouldn't be too much of an issue since it just means that the model does well on a variety of different images. We can also just check how these models do by loading in their state dicts from the files in the [food-classifier/Experiment/Experiment Results/model_state_dicts/](https://github.com/radioapple/food-classifier/tree/main/Experiment/Experiment%20Results/model_state_dicts) directory and then running them on the entire 500 images per class dataset (or even the full 1000 images if you want).
+**Note:** There was a bug in the code where I set it up so that the testing accuracies were evaluated using an augmented test dataset. It shouldn't be too much of an issue since it just means that the model does well on a variety of different images.
 
 #### (i) Loss & Accuracy Curves
 
@@ -79,7 +79,7 @@ There are also models that are doing better on the testing data than they are on
 
 **TODO:** Look into this problem further to see if testing accuracy > training accuracy is really an issue.
 
-**Explanation:** It likely isn't a bad thing at all. The training accuracy was evaluated without `torch.inference_mode()` meaning that the dropout layer was active when calculating these values. The testing accuracy was evaluated using `torch.inference_mode()` so it will naturally be higher, assuming our model did a good job of learning from the training data. To test if this is really the case, I will have to use the models again but this time, test it on the entire 500 images per class dataset to see how it does (the training dataset was set up randomly, we won't be able to retrieve it, hence why we'll look at the entire dataset).
+**Explanation:** It likely isn't a bad thing at all. The training accuracy was evaluated without `torch.inference_mode()` meaning that the dropout layer was active when calculating these values. The testing accuracy was evaluated using `torch.inference_mode()`, i.e. with no neurons being dropped, so it will naturally be higher since there's now more information available to make a decision with. There's also the part about augmnetation mentioned above.
 
 #### (iii) Accuracy vs. Loss Plot
 For viewing the relation between training accuracy and loss or testing accuracy and loss, we look at the following plot:
@@ -90,7 +90,7 @@ For viewing the relation between training accuracy and loss or testing accuracy 
 
 **Note:** The dashed lines in figure 1.2 are a bit arbitrary and only there to make it easier to separate points into high accuracy - loss loss, high accuracy - high loss, etc. Also note that the values that are plotted here are from table 1.1.
 
-Generally, the closer the test and training points are, the better the model since the closeness of the points indicates how appropriately our model fits the data (or possibly underfits). Further away points means that the model is overfitting (i.e. it fits training data better than test data) or there's some other issue causing testing accuracy to be better than the training accuracy. The former is due to not having much variation in the dataset or learning on the training dataset too quickly which leads to the model learning the training data very well, but not performing so well on unseen (test) data.
+Generally, the closer the test and training points are, the better the model since the closeness of the points indicates how appropriately our model fits the data (or possibly underfits). Further away points means that the model is overfitting (i.e. it fits training data better than test data) or there's some other issue causing testing accuracy to be better than the training accuracy. The former is due to not having much variation in the dataset or learning on the training dataset too quickly which leads to the model learning the training data very well, but not performing so well on unseen (test) data. The latter can be caused by underfitting, but is usually more likely due to dropout layers causing the training accuracy to be reduced since the training dataset has fewer neurons (and thus less information) to make a decision with or augmentation which is introducing some "errors" in the training dataset, but which prepares the model well for unseen data (the testing dataset).
 
 Model Name | Distance
 ------------- | -------------
@@ -111,12 +111,12 @@ $$\text{distance}_i = \sqrt{(\text{training accuracy}_i - \text{test accuracy}_i
 
 where $i$ is the number of the model.
 
-Organizing the points in figure 1.2 gives us table 1.2. This shows us that models 3 to 5 have training and testing loss and accuracy values the closest to each other.
+Organizing the points in figure 1.2 gives us table 1.2. This shows us that models 2 to 5 have training and testing loss and accuracy values the closest to each other.
 
 #### (iv) Best Model
 Based on the following criteria:
 1. The best model must have one of the highest testing accuracies
-2. The best model must also be fitting appropriately
+2. The best model must also be fitting appropriately (in our case, anything with testing accuracy $>\approx$ training accuracy  is good)
 
 It would appear that `model_2` is the best model. The hyperparameters for `model_2` are
 * augmentation intensity = 0
