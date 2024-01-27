@@ -13,6 +13,7 @@ In this experiment, we will try out different model architectures to see which i
 3. [**Results**](#results)
    1. [Loss Curves](#i-loss-curves)
    2. [Accuracy vs. Loss](#ii-accuracy-vs-loss)
+   3. [Final Model Loss Curves](#iii-final-model-loss-curves)
 4. [**Discussion**](#discussion)
 
 ## Introduction
@@ -95,12 +96,6 @@ and final run gave `final_model`, which was just the best model from models 0 to
 
 **Figure 1:** The loss curves for models 0 to 4. The x-axis is epochs and the y-axis is loss (left) or accuracy (right).
 
-<p align="center">
-  <img src="https://user-images.githubusercontent.com/104711470/216855875-15373a96-6f61-42b3-9e17-fcbdda1c2df1.png" width = 500px/>
-</p>
-
-**Figure 2:** Loss curves for `final_model`. The x-axis is epochs and the y-axis is loss (left) or accuracy (right).
-
 Model Name | train_loss |	train_acc |	test_loss |	test_acc
 :--------:|:--------:|:---------:|:---------:|:---------:
 `model_0` |	0.800 |	65.6% |	1.05 |	54.6%
@@ -108,20 +103,41 @@ Model Name | train_loss |	train_acc |	test_loss |	test_acc
 `model_2` |	0.956 |	54.1% |	0.972 |	55.6%
 `model_3` |	1.10 |	31.2% |	1.10 |	32.6%
 `model_4` |	1.10 |	30.2% |	1.10 |	34.9%
-`final_model` |	0.551 |	77.54% |	0.574 |	76.24%
 
-**Table 4:** Final loss and accuracy values for all models. Note that for model's 0 to 4, these values are after the 10th epoch. For `final_model`, these are after the 40th epoch.
+**Table 4:** Final loss and accuracy values for models 0 to 4.
 
 ### (ii) Accuracy vs. Loss
 
 ![image](https://user-images.githubusercontent.com/104711470/216856170-2331efd5-f8a5-4390-8b35-a44dec38c005.png)
 
-**Figure 3:** Accuracy vs loss plot for all the models. 
+**Figure 2:** Accuracy vs loss plot for all the models. Note that `final_model`'s results are shown in table 5.
 
-**Notes for figure 3:** 
+**Notes for figure 2:** 
 * The loss and accuracy values used were averaged over the last 5 epochs to avoid any issues due to fluctations. 
 * `model_3`'s test accuracy vs loss point overlaps with `model_4`'s test accuracy vs loss. 
 * The dashed lines represent the threshold I choose for what would be considered a "good" accuracy or loss.
+
+From table 4 and figure 2, we can try to pick out the best model. As a guess, I think the best model would be one that has the highest test accuracy and the smallest difference between training accuracy and test accuracy. The former is self-explanatory, but the latter is so that we have the least amount of over-fitting as possible.
+
+Now, from table 4, we can see that models 0 to 2 have the best test accuracies, with `model_2` having the best accuracy. Conveniently for us, we can see from figure 2 that model 2 also happens to be the have the least over-fitting out of models 0 to 2 (since train and test accuracies are close).
+
+Hence, `model_2` is the best model. So it will be our `final_model`.
+
+### (iii) Final Model Loss Curves
+
+After training model_2 again but now for 40 epochs, I got the loss curves shown in figure 3 below. The loss seems to fluctuate a lot, which is the same as before, but the accuracy stays relatively stable and it appears that the model doesn't overfit even after 40 epochs.
+
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/104711470/216855875-15373a96-6f61-42b3-9e17-fcbdda1c2df1.png" width = 500px/>
+</p>
+
+**Figure 3:** Loss curves for `final_model`. The x-axis is epochs and the y-axis is loss (left) or accuracy (right).
+
+Model Name | train_loss |	train_acc |	test_loss |	test_acc
+:--------:|:--------:|:---------:|:---------:|:---------:
+`final_model` |	0.551 |	77.54% |	0.574 |	76.24%
+
+**Table 5:** Final loss and accuracy values for `final_model`.
 
 ## Discussion
 
