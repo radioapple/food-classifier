@@ -278,8 +278,6 @@ def get_meta_data(meta_path: str or Path):
     # Based the order off of order that file names appear in meta_filenames_list
     lst_keys = ['class_names', 'labels','test_data_paths_dict', 'test_data_paths_lst', \
         'train_data_paths_dict', 'train_data_paths_lst']
-    print("meta_filenames_list:", meta_filenames_list)
-    print("\nlst_keys:", lst_keys)
     meta_data_dict = {}
     meta_data_dict.update(zip(lst_keys, meta_files_data))
     

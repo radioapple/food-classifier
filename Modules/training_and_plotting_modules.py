@@ -33,13 +33,13 @@ def train_step(model: torch.nn.Module,
         y_pred = model(X)
       
         loss = loss_fn(y_pred, y)
-        train_loss += loss.item()
+        train_loss += loss
       
         optimizer.zero_grad()
         loss.backward()
         optimizer.step()
       
-        y_pred_class = torch.argmax(torch.softmax(y_pred, dim = 1), dim = 1)
+        y_pred_class = torch.argmax(y_pred, dim = 1)
         train_acc += (y_pred_class == y).sum().item() / len(y_pred) # total num that are right / total num of samples
     
     train_loss = train_loss / len(dataloader) # average loss, i.e. loss per batch
